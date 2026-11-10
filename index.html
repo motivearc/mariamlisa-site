@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mariamlisa — Cellist</title>
+<meta name="description" content="Mariamlisa is a Malaysian cellist and recording artist performing at concerts, television productions, studio sessions, weddings and corporate events.">
+<meta property="og:title" content="Mariamlisa — Cellist">
+<meta property="og:description" content="Malaysian cellist and recording artist.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/hero.jpg">
+<meta name="theme-color" content="#000000">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Mariamlisa","jobTitle":"Cellist","nationality":"Malaysia","alumniOf":"Universiti Teknologi MARA"}
+</script>
+<style>
+  /* ---- Tokens: change colours and fonts here ---- */
+  :root {
+    --bg: #000;
+    --fg: #f2eee8;
+    --muted: #8b877f;
+    --line: #1c1c1c;
+    --accent: #c8a46e;
+    --serif: "Instrument Serif", Georgia, serif;
+    --sans: "Inter", system-ui, sans-serif;
+    --pad: clamp(16px, 5vw, 64px);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font: 400 16px/1.6 var(--sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  ul { list-style: none; }
+  ::selection { background: var(--accent); color: #000; }
+
+  /* ---- Nav ---- */
+  nav {
+    position: fixed; inset: 0 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px var(--pad);
+    z-index: 10;
+    background: linear-gradient(var(--bg) 60%, transparent);
+  }
+  nav .mark { font: 400 22px/1 var(--serif); letter-spacing: .02em; }
+  nav .links { display: flex; gap: 28px; font-size: 14px; }
+  nav .links a { opacity: .7; transition: opacity .2s; }
+  nav .links a:hover { opacity: 1; }
+
+  /* ---- Hero ---- */
+  /* The hero poster already carries the name, so the h1 is for screen readers and search only. */
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  /* The whole poster is always visible (never cropped). A blurred copy of it fills the rest of the screen. */
+  .hero {
+    position: relative; isolation: isolate;
+    height: 100svh; padding-top: 64px;
+    display: flex; justify-content: center;
+    overflow: hidden;
+  }
+  .hero::before, .hero::after { content: ""; position: absolute; z-index: -1; pointer-events: none; }
+  .hero::before { inset: -8%; background: url(assets/hero.jpg) center / cover; filter: blur(48px) brightness(.5); }
+  .hero::after { inset: 0; background: linear-gradient(transparent 80%, var(--bg)); }
+  .hero img {
+    display: block;
+    width: 100%; height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 30px 60px rgba(0, 0, 0, .6));
+    animation: rise 2.4s cubic-bezier(.2, .7, .2, 1) both;
+  }
+  /* Screens taller than the poster: it already fills the width, so let the hero take the poster's height. */
+  @media (max-aspect-ratio: 4/5) {
+    .hero { height: auto; }
+    .hero img { height: auto; }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: scale(1.06); filter: blur(6px); }
+    to { opacity: 1; transform: none; filter: none; }
+  }
+
+  /* Photos */
+  figure img { display: block; width: 100%; height: auto; }
+  .about .wrap, .book .wrap { grid-template-columns: 2fr 3fr; align-items: center; gap: clamp(32px, 6vw, 96px); }
+  .gallery { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 64px; }
+  .gallery img { aspect-ratio: 4 / 5; object-fit: cover; border-radius: 16px; }
+
+  /* ---- Sections ---- */
+  section { padding: clamp(96px, 14vw, 180px) var(--pad); border-top: 1px solid var(--line); }
+  .wrap { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 3fr; gap: 48px; }
+  h2 { font: 400 14px/1.6 var(--sans); color: var(--muted); }
+
+  .about .lead { margin-top: 24px; font: 400 clamp(28px, 3.6vw, 44px)/1.25 var(--serif); }
+  .about .body { margin-top: 32px; display: grid; gap: 20px; color: var(--muted); }
+
+  .rows li {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    padding: 18px 0; border-bottom: 1px solid var(--line);
+  }
+  .rows li:first-child { padding-top: 0; }
+  .rows b { font: 400 22px/1.3 var(--serif); }
+  .rows span { color: var(--muted); }
+
+  .names { columns: 3 220px; column-gap: 32px; }
+  .names li { break-inside: avoid; padding: 10px 0; font: 400 22px/1.3 var(--serif); }
+  .names small { display: block; font: 400 14px/1.5 var(--sans); color: var(--muted); }
+
+  /* ---- Book ---- */
+  .book h3 { font: 400 clamp(36px, 4.8vw, 64px)/1.08 var(--serif); }
+  .book ul { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 8px 28px; color: var(--muted); }
+  /* ---- Rates ---- */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+  .cards + .cards { margin-top: 12px; }
+  .card {
+    display: grid; gap: 6px; align-content: start;
+    padding: 20px; border: 1px solid var(--line); border-radius: 16px;
+    background: #0a0a0a;
+    transition: border-color .25s;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card b { font-weight: 500; font-size: 14px; }
+  .card strong { font: 400 30px/1.1 var(--serif); color: var(--accent); white-space: nowrap; }
+  .card span { color: var(--muted); font-size: 14px; }
+  .wrap > * { min-width: 0; }
+
+  /* ---- Details sheet (native <dialog>) ---- */
+  dialog {
+    width: min(920px, 100% - 32px); max-height: calc(100svh - 32px);
+    margin: auto; padding: 0;
+    border: 1px solid var(--line); border-radius: 20px;
+    background: #0a0a0a; color: var(--fg);
+  }
+  dialog[open] { animation: pop .35s ease both; }
+  dialog::backdrop { background: rgba(0, 0, 0, .75); backdrop-filter: blur(6px); }
+  html:has(dialog[open]) { overflow: hidden; }
+  @keyframes pop { from { opacity: 0; transform: translateY(16px); } }
+  .sheet { padding: clamp(24px, 5vw, 56px); }
+  .sheet h3 { margin: 48px 0 16px; font: 400 14px/1.6 var(--sans); color: var(--muted); }
+  .sheet h3:first-of-type { margin-top: 0; }
+  .close {
+    position: sticky; top: 16px; float: right; margin: 16px 16px 0 0;
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid var(--line); background: var(--bg); color: var(--fg);
+    font-size: 22px; line-height: 1; cursor: pointer;
+  }
+  .close:hover { border-color: var(--fg); }
+  .pkgs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .pkg { padding: 20px; border: 1px solid var(--line); border-radius: 16px; }
+  .pkg h4 { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 12px; font: 400 24px/1.2 var(--serif); }
+  .pkg h4 span { color: var(--accent); white-space: nowrap; }
+  .pkg li { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+  .pkg li:last-child { color: var(--fg); }
+  .sheet .names li { font-size: 19px; }
+
+  .btn {
+    display: inline-block; margin-top: 56px;
+    padding: 16px 36px; border: 1px solid var(--fg); border-radius: 999px;
+    background: none; color: inherit;
+    font: 500 15px/1.6 var(--sans); cursor: pointer;
+    transition: background .25s, color .25s;
+  }
+  .btn:hover { background: var(--fg); color: var(--bg); }
+
+  footer {
+    display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    padding: 32px var(--pad); border-top: 1px solid var(--line);
+    font-size: 13px; color: var(--muted);
+  }
+
+  /* ---- Reveal on scroll ---- */
+  .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity 1s ease, transform 1s ease; }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  @media (max-width: 760px) {
+    nav .links a:nth-child(-n+3) { display: none; }
+    .wrap, .about .wrap, .book .wrap { grid-template-columns: 1fr; gap: 24px; }
+    .gallery { gap: 6px; margin-bottom: 24px; }
+    .gallery img { border-radius: 10px; }
+    .rows li { grid-template-columns: 1fr; gap: 2px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .hero img, dialog[open] { animation: none; }
+    .js .reveal { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="mark" href="#">Mariamlisa</a>
+  <div class="links">
+    <a href="#about">About</a>
+    <a href="#live">Live</a>
+    <a href="#recordings">Recordings</a>
+    <a href="#rates">Rates</a>
+    <a href="#book">Book</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <h1 class="sr">Mariamlisa, Cellist</h1>
+  <img src="assets/hero.jpg" width="1024" height="1280" fetchpriority="high"
+       alt="Mariamlisa playing cello on stage, eyes closed. Text: Mariamlisa, Cellist. Live performance, weddings, corporate events. Kuala Lumpur, Malaysia.">
+</header>
+
+<main>
+  <section id="about" class="about">
+    <div class="wrap reveal">
+      <figure><img src="assets/portrait.jpg" width="1024" height="1280" loading="lazy" alt="Portrait of Mariamlisa seated with her cello"></figure>
+      <div>
+        <h2>About</h2>
+        <p class="lead">Malaysian cellist and recording artist, trained in classical and contemporary music.</p>
+        <div class="body">
+          <p>Mariamlisa holds a Bachelor's Degree in Music from Universiti Teknologi MARA (UiTM), with formal training in cello and piano.</p>
+          <p>She performs at live concerts, television productions, studio sessions, weddings and corporate events, alongside established Malaysian and international musicians.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="live">
+    <div class="wrap reveal">
+      <div class="gallery">
+        <figure><img src="assets/stage-mono.jpg" width="608" height="1080" loading="lazy" alt="Mariamlisa playing cello on stage, in black and white"></figure>
+        <figure><img src="assets/band.jpg" width="1280" height="1024" loading="lazy" alt="Mariamlisa with a band of eight musicians, posed against black"></figure>
+        <figure><img src="assets/stage-colour.jpg" width="1024" height="1280" loading="lazy" alt="Mariamlisa seated with her cello on an outdoor stage, in front of a drum kit"></figure>
+      </div>
+      <h2>Live</h2>
+      <ul class="rows">
+        <li><b>Mentor TV3</b><span>Ziana Zain &amp; Mat, Ella &amp; Putri Caroline · MD Lok U Faizal Uzir</span></li>
+        <li><b>Konsert Awie &amp; Ella</b><span>Malaysia &amp; Singapore</span></li>
+        <li><b>XPDC Un'Metal Live</b><span>RTM</span></li>
+        <li><b>Terpaling Juara</b><span>Hazami</span></li>
+        <li><b>Versus</b><span>Estranged Band</span></li>
+        <li><b>Double Trouble</b><span>Wings &amp; Search</span></li>
+        <li><b>Wings &amp; Superfriends</b><span>Belenggu Irama</span></li>
+        <li><b>Toko Kilat Tour</b><span>Noh Salleh</span></li>
+        <li><b>Lagu Cinta Kita</b><span>MD Genervie Kam</span></li>
+        <li><b>Jamming Hot TV3</b><span>Indah Ruhaila</span></li>
+        <li><b>Exists Reunion Unplugged</b><span>Singapore</span></li>
+        <li><b>International Indie Music Festival</b><span>Mafidz · Jakarta</span></li>
+        <li><b>Mafidz x Pusakata Showcase</b><span></span></li>
+        <li><b>SWARA &amp; SwarAsia</b><span>SWARA Community Arts</span></li>
+        <li><b>The Bollywood Guide to Revenge</b><span>Theatre · London</span></li>
+        <li><b>Sepet The Musical</b><span>Musical theatre</span></li>
+        <li><b>Mahsuri (&amp; Other Peculiar Tales)</b><span>Musical theatre</span></li>
+        <li><b>MYMIKRO'26</b><span>Musical theatre · AKPK</span></li>
+        <li><b>Majlis Apresiasi HKHM 2026</b><span></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="recordings">
+    <div class="wrap reveal">
+      <h2>Recordings</h2>
+      <ul class="names">
+        <li>Mafidz</li>
+        <li>Wings</li>
+        <li>Ella</li>
+        <li>Hazami</li>
+        <li>Amylea Azizan</li>
+        <li>Indah Ruhaila</li>
+        <li>DJ Fuzz</li>
+        <li>Eddie<small>XPDC · bassist, producer</small></li>
+        <li>Edrie Hashim<small>Composer, arranger, guitarist</small></li>
+        <li>Raja Mohd Sham<small>Arranger, producer</small></li>
+        <li>Sham Cairel<small>Composer, arranger, producer</small></li>
+        <li>Lok U Faizal Uzir<small>Music director, arranger, pianist</small></li>
+        <li>Endee Ahmad<small>Singer-songwriter</small></li>
+        <li>Brendan de Cruz<small>Singer-songwriter</small></li>
+        <li>Priscillia Xavier<small>Singer-songwriter</small></li>
+        <li>Zalila Lee<small>Singer-songwriter</small></li>
+        <li>Liver &amp; Lung Productions<small>Independent theatre</small></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="press">
+    <div class="wrap reveal">
+      <h2>Press</h2>
+      <ul class="rows">
+        <li><b>WM</b><span>Harian Metro</span></li>
+        <li><b>Nona</b><span>TV3</span></li>
+        <li><b>Tumit Tinggi</b><span>RTM</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="management">
+    <div class="wrap reveal">
+      <h2>Management</h2>
+      <ul class="rows">
+        <li><b>Cellosphere Creative</b><span>Founder</span></li>
+        <li><b>Feel Tu Penting</b><span>Management team</span></li>
+        <li><b>Temjin</b><span>Band manager</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Prices appear in the cards and again in the details dialog: change them in both places. -->
+  <section id="rates">
+    <div class="wrap reveal">
+      <h2>Rates</h2>
+      <div>
+        <ul class="cards">
+          <li class="card"><b>Solo A</b><strong>RM 1,000</strong><span>6 songs</span></li>
+          <li class="card"><b>Solo B</b><strong>RM 1,200</strong><span>9 songs</span></li>
+          <li class="card"><b>Solo C</b><strong>RM 1,500</strong><span>12 songs</span></li>
+          <li class="card"><b>Duo A</b><strong>RM 1,800</strong><span>8 songs</span></li>
+          <li class="card"><b>Duo B</b><strong>RM 2,000</strong><span>12 songs</span></li>
+        </ul>
+
+        <ul class="cards">
+          <li class="card"><b>Sound system A</b><strong>RM 1,000</strong><span>Up to 200 guests · 2 top speakers</span></li>
+          <li class="card"><b>Sound system B</b><strong>RM 1,500</strong><span>Up to 500 guests · 4 top speakers</span></li>
+        </ul>
+
+        <button class="btn" type="button" data-open="details">All details</button>
+      </div>
+    </div>
+
+    <dialog id="details" aria-labelledby="details-title">
+      <form method="dialog"><button class="close" aria-label="Close">&times;</button></form>
+      <div class="sheet">
+        <h3 id="details-title">Packages</h3>
+        <div class="pkgs">
+          <article class="pkg">
+            <h4>Solo A <span>RM 1,000</span></h4>
+            <ul>
+              <li><span>Walk down the aisle</span><span>1</span></li>
+              <li><span>Walk to sweetheart table</span><span>1</span></li>
+              <li><span>During meal</span><span>3</span></li>
+              <li><span>Cake cutting</span><span>1</span></li>
+              <li><span>Songs</span><span>6</span></li>
+            </ul>
+          </article>
+          <article class="pkg">
+            <h4>Solo B <span>RM 1,200</span></h4>
+            <ul>
+              <li><span>Walk down the aisle</span><span>1</span></li>
+              <li><span>Walk to sweetheart table</span><span>1</span></li>
+              <li><span>During meal</span><span>6</span></li>
+              <li><span>Cake cutting</span><span>1</span></li>
+              <li><span>Songs</span><span>9</span></li>
+            </ul>
+          </article>
+          <article class="pkg">
+            <h4>Solo C <span>RM 1,500</span></h4>
+            <ul>
+              <li><span>Walk down the aisle</span><span>1</span></li>
+              <li><span>Walk to sweetheart table</span><span>1</span></li>
+              <li><span>During meal</span><span>8</span></li>
+              <li><span>Cake cutting</span><span>1</span></li>
+              <li><span>Songs</span><span>12</span></li>
+            </ul>
+          </article>
+          <article class="pkg">
+            <h4>Duo A <span>RM 1,800</span></h4>
+            <ul>
+              <li><span>Walk down the aisle</span><span>1</span></li>
+              <li><span>Walk to sweetheart table</span><span>1</span></li>
+              <li><span>During meal</span><span>5</span></li>
+              <li><span>Cake cutting</span><span>1</span></li>
+              <li><span>Songs</span><span>8</span></li>
+            </ul>
+          </article>
+          <article class="pkg">
+            <h4>Duo B <span>RM 2,000</span></h4>
+            <ul>
+              <li><span>Guest arrival</span><span>4</span></li>
+              <li><span>Walk down the aisle</span><span>1</span></li>
+              <li><span>Walk to sweetheart table</span><span>1</span></li>
+              <li><span>During meal</span><span>5</span></li>
+              <li><span>Cake cutting</span><span>1</span></li>
+              <li><span>Songs</span><span>12</span></li>
+            </ul>
+          </article>
+        </div>
+
+        <h3>Sound system</h3>
+        <div class="pkgs">
+          <article class="pkg">
+            <h4>A <span>RM 1,000</span></h4>
+            <ul>
+              <li><span>Guests</span><span>Up to 200</span></li>
+              <li><span>Top speakers</span><span>2</span></li>
+              <li><span>Monitor speaker</span><span>1</span></li>
+              <li><span>Mixing console</span><span>1</span></li>
+              <li><span>Instrument microphone</span><span>✓</span></li>
+              <li><span>Aux stereo cable</span><span>✓</span></li>
+              <li><span>XLR cables &amp; stands</span><span>✓</span></li>
+              <li><span>Sub power for band</span><span>✓</span></li>
+              <li><span>Sound crew</span><span>1</span></li>
+            </ul>
+          </article>
+          <article class="pkg">
+            <h4>B <span>RM 1,500</span></h4>
+            <ul>
+              <li><span>Guests</span><span>Up to 500</span></li>
+              <li><span>Top speakers</span><span>4</span></li>
+              <li><span>Monitor speaker</span><span>1</span></li>
+              <li><span>Mixing console</span><span>1</span></li>
+              <li><span>Instrument microphone</span><span>✓</span></li>
+              <li><span>Aux stereo cable</span><span>✓</span></li>
+              <li><span>XLR cables &amp; stands</span><span>✓</span></li>
+              <li><span>Sub power for band</span><span>✓</span></li>
+              <li><span>Sound crew</span><span>1</span></li>
+            </ul>
+          </article>
+        </div>
+
+        <h3>Songs</h3>
+        <ul class="names">
+          <li>Unforgettable</li>
+          <li>Everything I Do (I Do It for You)</li>
+          <li>Can't Help Falling in Love</li>
+          <li>Close to You</li>
+          <li>Perfect<small>Ed Sheeran</small></li>
+          <li>Fly Me to the Moon</li>
+          <li>L-O-V-E</li>
+          <li>What a Wonderful World</li>
+          <li>Yesterday<small>The Beatles</small></li>
+          <li>Can't Take My Eyes Off You</li>
+          <li>My Heart Will Go On</li>
+          <li>Malam Bulan Di Pagar Bintang</li>
+          <li>Belaian Jiwa</li>
+          <li>Moon River</li>
+          <li>Somewhere Over the Rainbow</li>
+          <li>You Raise Me Up</li>
+          <li>Speak Softly Love<small>The Godfather</small></li>
+          <li>Somewhere Only We Know<small>Keane</small></li>
+          <li>The Scientist<small>Coldplay</small></li>
+          <li>Somethin' Stupid<small>Robbie Williams &amp; Nicole Kidman</small></li>
+          <li>Laskar Pelangi</li>
+          <li>Aku Tenang<small>Fourtwnty</small></li>
+          <li>Rahsia Tuhan<small>Noh Salleh</small></li>
+        </ul>
+      </div>
+    </dialog>
+  </section>
+
+  <section id="book" class="book">
+    <div class="wrap reveal">
+      <figure><img src="assets/book.jpg" width="1024" height="1280" loading="lazy" alt="Mariamlisa with her cello in red stage light. Text: Mariamlisa, Cellist. Live performance, weddings, corporate events."></figure>
+      <div>
+      <h3>From intimate ceremonies to large&#8209;scale productions.</h3>
+      <ul>
+        <li>Weddings</li>
+        <li>Corporate Events</li>
+        <li>Private Events</li>
+        <li>Live Music Coordination</li>
+        <li>Sound System Supply</li>
+      </ul>
+      <a class="btn" href="https://wa.me/601121039596?text=Hi%20Mariamlisa%2C%20I'd%20like%20to%20make%20a%20booking." target="_blank" rel="noopener">Book Mariamlisa</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>© <span id="y">2026</span> Mariamlisa</span>
+  <span>Cellosphere Creative</span>
+</footer>
+
+<script>
+  document.documentElement.classList.add("js");
+  document.getElementById("y").textContent = new Date().getFullYear();
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+  // [data-open="id"] opens that <dialog>; clicking the dimmed backdrop closes it (Esc works natively).
+  document.querySelectorAll("[data-open]").forEach((btn) => {
+    const dialog = document.getElementById(btn.dataset.open);
+    btn.addEventListener("click", () => dialog.showModal());
+    dialog.addEventListener("click", (e) => { if (e.target === dialog) dialog.close(); });
+  });
+</script>
+</body>
+</html>
