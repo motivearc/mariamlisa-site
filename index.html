@@ -169,6 +169,10 @@
   footer .top { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-6); font-size: var(--text-sm); color: var(--text-muted); }
   footer .top ul { display: flex; gap: var(--space-6); }
   footer .top a:hover { color: var(--text); }
+  .credit { display: block; margin-top: var(--space-2); font-size: var(--text-xs); line-height: var(--leading-xs); }
+  .credit a { color: var(--text-muted); border-bottom: 1px solid transparent; transition: color var(--dur-fast), border-color var(--dur-fast); }
+  .credit a:hover { color: var(--text); border-bottom-color: var(--text-muted); }
+  .credit sup { margin-left: 1px; font-size: 9px; }
   .footmark { margin-top: var(--space-12); height: .62em; overflow: hidden; color: var(--surface-raised); }
 
   /* ---- Dialog (All details) ---- */
@@ -533,7 +537,10 @@
 <footer>
   <div class="container">
     <div class="top">
-      <span>© <span id="y">2026</span> Mariamlisa · Cellosphere Creative</span>
+      <div>
+        <span>© <span id="y">2026</span> Mariamlisa · Cellosphere Creative</span>
+        <small class="credit">Developed by <a href="https://motivearc.com" target="_blank" rel="noopener noreferrer">Motive Arc<sup>™</sup></a></small>
+      </div>
       <ul>
         <li><a href="#about">About</a></li>
         <li><a href="#live">Live</a></li>
