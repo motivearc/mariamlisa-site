@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Design system</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../tokens.css">
+<style>
+  /* Primitives, built once in isolation. Every value comes from tokens.css. */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font: 400 var(--text-base)/var(--leading-base) var(--font-sans); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  ul { list-style: none; }
+  img { display: block; max-width: 100%; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+
+  .page { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter) var(--space-32); }
+  .spec { padding: var(--space-16) 0; border-top: 1px solid var(--border); }
+  .spec > h2.tag { font-size: var(--text-xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--space-8); font-weight: 500; }
+  .row { display: flex; flex-wrap: wrap; gap: var(--space-6); align-items: center; }
+
+  /* Nav */
+  .nav { display: flex; justify-content: space-between; align-items: center; height: var(--header); }
+  .nav a { font-size: var(--text-xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; font-weight: 500; color: var(--text); opacity: .7; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: opacity var(--dur-fast); }
+  .nav a:hover { opacity: 1; }
+  .nav a[aria-current] { opacity: 1; border-bottom-color: var(--text); }
+
+  /* Eyebrow */
+  .eyebrow { display: flex; gap: var(--space-2); font-size: var(--text-sm); color: var(--text-muted); }
+  .eyebrow::before { content: "/"; color: var(--accent); }
+
+  /* Headings */
+  .h-xl { font-size: var(--text-xl); line-height: var(--leading-xl); font-weight: 300; letter-spacing: var(--tracking-tight); }
+  .h-2xl { font-size: var(--text-2xl); line-height: var(--leading-2xl); font-weight: 300; letter-spacing: var(--tracking-tight); }
+  .wordmark { font-size: var(--text-display); line-height: var(--leading-display); font-weight: 600; letter-spacing: -0.04em; text-transform: uppercase; text-align: center; white-space: nowrap; }
+
+  /* Text link */
+  .tlink { display: inline-flex; gap: var(--space-3); align-items: center; font-weight: 500; }
+  .tlink::before { content: "→"; color: var(--accent); transition: transform var(--dur-fast) var(--ease); }
+  .tlink span { border-bottom: 1px solid var(--text-muted); transition: border-color var(--dur-fast); }
+  .tlink:hover::before { transform: translateX(4px); }
+  .tlink:hover span { border-color: var(--text); }
+
+  /* Button */
+  .btn { display: inline-flex; align-items: center; height: 48px; padding: 0 var(--space-8); border-radius: var(--radius-pill); font: 500 var(--text-sm)/1 var(--font-sans); cursor: pointer; border: 1px solid transparent; transition: background var(--dur-fast), color var(--dur-fast), transform var(--dur-fast); }
+  .btn:active { transform: scale(.98); }
+  .btn-primary { background: var(--accent); color: var(--on-accent); }
+  .btn-primary:hover { background: color-mix(in srgb, var(--accent), white 12%); }
+  .btn-outline { background: none; color: var(--text); border-color: var(--text); }
+  .btn-outline:hover { background: var(--text); color: var(--bg); }
+  .btn:disabled { opacity: .4; pointer-events: none; }
+
+  /* Status pill */
+  .pill { display: inline-flex; gap: var(--space-2); align-items: center; padding: 6px 14px; border-radius: var(--radius-pill); background: var(--surface-raised); border: 1px solid var(--border); font-size: var(--text-sm); }
+  .pill::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 50% { opacity: .4; } }
+
+  /* Hero trio (photo tiles) */
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); align-items: start; margin-top: var(--space-12); }
+  .tile { border-radius: var(--radius-md); overflow: hidden; background: var(--surface); }
+  .tile img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 25%; transition: transform var(--dur-slow) var(--ease); }
+  .tile:hover img { transform: scale(1.04); }
+  .trio .tile:nth-child(2) { margin-top: var(--space-24); }
+
+  /* Card */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-4); }
+  .card { background: var(--surface); border: 1px solid transparent; border-radius: var(--radius-lg); padding: var(--space-3); transition: border-color var(--dur-fast); }
+  .card:hover { border-color: var(--border-strong); }
+  .card .tile img { aspect-ratio: 3 / 2; }
+  .card .meta { display: flex; justify-content: space-between; padding: var(--space-6) var(--space-3) var(--space-2); font-size: var(--text-sm); color: var(--text-muted); }
+  .card h3 { padding: 0 var(--space-3) var(--space-3); font-size: var(--text-lg); line-height: var(--leading-lg); font-weight: 300; letter-spacing: var(--tracking-snug); }
+
+  /* Stacked sticky cards */
+  .stack article { position: sticky; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-12) var(--space-8); min-height: 320px; text-align: center; display: grid; align-content: center; justify-items: center; gap: var(--space-4); }
+  .stack article:nth-child(1) { top: calc(var(--space-6) * 1); }
+  .stack article:nth-child(2) { top: calc(var(--space-6) * 2); }
+  .stack article:nth-child(3) { top: calc(var(--space-6) * 3); }
+  .stack article + article { margin-top: var(--space-6); }
+  .stack .price { color: var(--accent); font-size: var(--text-lg); }
+  .stack p { color: var(--text-muted); }
+
+  /* Marquee */
+  .marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+  .marquee ul { display: flex; gap: var(--space-4); width: max-content; animation: drift 40s linear infinite; }
+  .marquee:hover ul { animation-play-state: paused; }
+  .marquee li { width: 240px; }
+  .marquee img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius-md); }
+  @keyframes drift { to { transform: translateX(-50%); } }
+
+  /* Footer */
+  .foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-8); align-items: end; }
+  .foot ul { display: flex; gap: var(--space-6); }
+  footer small { display: block; margin-top: var(--space-12); color: var(--text-muted); font-size: var(--text-sm); }
+  .foot-mark { overflow: hidden; height: .62em; margin-top: var(--space-12); color: var(--surface-raised); }
+
+  @media (max-width: 640px) {
+    .nav a:nth-child(-n+2) { display: none; }
+    .trio { gap: var(--space-2); }
+    .trio .tile:nth-child(2) { margin-top: var(--space-8); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before { animation: none !important; transition: none !important; }
+    .stack article { position: static; }
+    .marquee { overflow-x: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <section class="spec">
+    <h2 class="tag">Nav</h2>
+    <nav class="nav" aria-label="Example"><a href="#" aria-current="true">Home</a><a href="#">About</a><a href="#">Rates</a><a href="#">Book</a></nav>
+  </section>
+
+  <section class="spec">
+    <h2 class="tag">Wordmark + photo tiles</h2>
+    <p class="wordmark">Mariamlisa</p>
+    <div class="trio">
+      <figure class="tile"><img src="../../assets/stage-mono.jpg" width="608" height="1080" alt="Mariamlisa playing cello on stage, in black and white"></figure>
+      <figure class="tile"><img src="../../assets/portrait.jpg" width="1024" height="1280" alt="Portrait of Mariamlisa seated with her cello"></figure>
+      <figure class="tile"><img src="../../assets/stage-colour.jpg" width="1024" height="1280" alt="Mariamlisa with her cello on an outdoor stage"></figure>
+    </div>
+  </section>
+
+  <section class="spec">
+    <h2 class="tag">Eyebrow, headings, text link, status pill</h2>
+    <div style="display:grid; gap: var(--space-6)">
+      <span class="eyebrow">Live</span>
+      <p class="h-xl">Concerts, television and theatre</p>
+      <p class="h-2xl">Cellist for weddings, stages and studios.</p>
+      <div class="row"><a class="tlink" href="#"><span>Book a date</span></a><span class="pill">Available for bookings</span></div>
+    </div>
+  </section>
+
+  <section class="spec">
+    <h2 class="tag">Buttons</h2>
+    <div class="row">
+      <a class="btn btn-primary" href="#">Book on WhatsApp</a>
+      <button class="btn btn-outline" type="button">All details</button>
+      <button class="btn btn-outline" type="button" disabled>Disabled</button>
+    </div>
+  </section>
+
+  <section class="spec">
+    <h2 class="tag">Card</h2>
+    <div class="cards">
+      <article class="card"><figure class="tile"><img src="../../assets/band.jpg" width="1280" height="1024" alt="Mariamlisa with a band of eight musicians"></figure><div class="meta"><span class="eyebrow">Concert</span><span>Malaysia &amp; Singapore</span></div><h3>Konsert Awie &amp; Ella</h3></article>
+      <article class="card"><figure class="tile"><img src="../../assets/stage-colour.jpg" width="1024" height="1280" alt="Mariamlisa on an outdoor stage"></figure><div class="meta"><span class="eyebrow">Television</span><span>TV3</span></div><h3>Mentor TV3</h3></article>
+      <article class="card"><figure class="tile"><img src="../../assets/stage-mono.jpg" width="608" height="1080" alt="Mariamlisa on stage in black and white"></figure><div class="meta"><span class="eyebrow">Theatre</span><span>London</span></div><h3>The Bollywood Guide to Revenge</h3></article>
+    </div>
+  </section>
+
+  <section class="spec">
+    <h2 class="tag">Stacked cards (scroll)</h2>
+    <div class="stack">
+      <article><span class="eyebrow">01</span><p class="h-2xl">Solo</p><p>6, 9 or 12 songs</p><span class="price">From RM 1,000</span></article>
+      <article><span class="eyebrow">02</span><p class="h-2xl">Duo</p><p>8 or 12 songs</p><span class="price">From RM 1,800</span></article>
+      <article><span class="eyebrow">03</span><p class="h-2xl">Sound system</p><p>Up to 200 or 500 guests</p><span class="price">From RM 1,000</span></article>
+    </div>
+  </section>
+
+  <section class="spec">
+    <h2 class="tag">Marquee</h2>
+    <div class="marquee">
+      <ul>
+        <li><img src="../../assets/band.jpg" alt="Band photo"></li>
+        <li><img src="../../assets/portrait.jpg" alt="Portrait"></li>
+        <li><img src="../../assets/stage-mono.jpg" alt="Stage, black and white"></li>
+        <li><img src="../../assets/stage-colour.jpg" alt="Outdoor stage"></li>
+        <li><img src="../../assets/book.jpg" alt="Red stage light"></li>
+        <li aria-hidden="true"><img src="../../assets/band.jpg" alt=""></li>
+        <li aria-hidden="true"><img src="../../assets/portrait.jpg" alt=""></li>
+        <li aria-hidden="true"><img src="../../assets/stage-mono.jpg" alt=""></li>
+        <li aria-hidden="true"><img src="../../assets/stage-colour.jpg" alt=""></li>
+        <li aria-hidden="true"><img src="../../assets/book.jpg" alt=""></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="spec">
+    <h2 class="tag">Footer</h2>
+    <footer>
+      <div class="foot">
+        <p class="h-xl" style="max-width: 14ch">Music for the moments that matter.</p>
+        <ul><li><a class="tlink" href="#"><span>WhatsApp</span></a></li></ul>
+      </div>
+      <small>© 2026 Mariamlisa · Cellosphere Creative</small>
+      <p class="wordmark foot-mark" aria-hidden="true">Mariamlisa</p>
+    </footer>
+  </section>
+
+</div>
+</body>
+</html>

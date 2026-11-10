@@ -1,0 +1,45 @@
+/* Mariamlisa design tokens: the one source for colours, type, space and motion.
+   Measured values and contrast pairs live in replica/design/tokens.json; change both together.
+   Components use these variables only, never raw hex. The DM Sans <link> is in each page head. */
+
+:root {
+  /* Colour roles */
+  --bg: #0b0b0b;
+  --surface: #131313;
+  --surface-raised: #1a1a1a;
+  --border: #232323;
+  --border-strong: #303030;
+  --text: #ededea;
+  --text-muted: #a3a3a3;
+  --accent: #c8a46e;
+  --on-accent: #0b0b0b;
+
+  /* Type */
+  --font-sans: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --text-xs: 12px;      --leading-xs: 16px;
+  --text-sm: 14px;      --leading-sm: 20px;
+  --text-base: 16px;    --leading-base: 26px;
+  --text-lg: 20px;      --leading-lg: 28px;
+  --text-xl: clamp(28px, 3.2vw, 36px);  --leading-xl: 1.05;
+  --text-2xl: clamp(40px, 5.5vw, 56px); --leading-2xl: 1;
+  --text-display: clamp(48px, 15vw, 220px); --leading-display: .85; /* 10-letter name fits the content width */
+  --tracking-caps: .12em;
+  --tracking-tight: -0.045em;
+  --tracking-snug: -0.02em;
+
+  /* Space (4px base) */
+  --space-1: 4px;  --space-2: 8px;   --space-3: 12px; --space-4: 16px;
+  --space-6: 24px; --space-8: 32px;  --space-12: 48px; --space-16: 64px;
+  --space-24: 96px; --space-32: 128px;
+
+  /* Radius, shadow, motion */
+  --radius-sm: 6px; --radius-md: 10px; --radius-lg: 14px; --radius-pill: 999px;
+  --shadow-pop: 0 30px 60px rgba(0, 0, 0, .5);
+  --dur-fast: 200ms; --dur-base: 400ms; --dur-slow: 800ms;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+
+  /* Layout */
+  --gutter: clamp(16px, 3.5vw, 40px);
+  --max: 1440px;
+  --header: 64px;
+}
