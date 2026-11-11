@@ -120,6 +120,11 @@
   .card h3 { font-size: var(--text-lg); line-height: var(--leading-lg); font-weight: 300; letter-spacing: var(--tracking-snug); }
   .card span { font-size: var(--text-sm); color: var(--text-muted); white-space: nowrap; }
 
+  /* ---- Watch: two portrait videos ---- */
+  .videos { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); max-width: 640px; margin: 0 auto; }
+  .videos figure { display: grid; gap: var(--space-3); }
+  .videos video { display: block; width: 100%; height: auto; aspect-ratio: 9 / 16; object-fit: cover; border-radius: var(--radius-md); background: var(--surface); }
+
   /* ---- Rates: stacked sticky cards ---- */
   .stack article {
     position: sticky;
@@ -340,6 +345,27 @@
           <li class="card"><h3>Feel Tu Penting</h3><span>Management team</span></li>
           <li class="card"><h3>Temjin</h3><span>Band manager</span></li>
         </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Videos only download when played (preload="metadata"); the poster frame shows until then. -->
+  <section id="watch">
+    <div class="container reveal">
+      <div class="head" style="justify-items:center; text-align:center"><span class="eyebrow">Watch</span><h2 class="h-2xl">Wedding and stage</h2></div>
+      <div class="videos">
+        <figure>
+          <video controls playsinline preload="metadata" poster="assets/video/wedding.jpg" width="576" height="1024" aria-label="Mariamlisa playing cello at a wedding ceremony">
+            <source src="assets/video/wedding.mp4" type="video/mp4">
+          </video>
+          <figcaption class="eyebrow">Wedding</figcaption>
+        </figure>
+        <figure>
+          <video controls playsinline preload="metadata" poster="assets/video/stage.jpg" width="576" height="1024" aria-label="Mariamlisa playing electric cello on stage">
+            <source src="assets/video/stage.mp4" type="video/mp4">
+          </video>
+          <figcaption class="eyebrow">Stage</figcaption>
+        </figure>
       </div>
     </div>
   </section>
