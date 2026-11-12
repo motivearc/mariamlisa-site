@@ -136,6 +136,7 @@
   .stack article:nth-child(1) { top: calc(var(--header) + var(--space-6) * 0); }
   .stack article:nth-child(2) { top: calc(var(--header) + var(--space-6) * 1); }
   .stack article:nth-child(3) { top: calc(var(--header) + var(--space-6) * 2); }
+  .stack article:nth-child(4) { top: calc(var(--header) + var(--space-6) * 3); }
   .stack article + article { margin-top: var(--space-6); }
   .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: var(--space-3); width: min(100%, 640px); margin-top: var(--space-4); }
   .options li { padding: var(--space-4); border: 1px solid var(--border); border-radius: var(--radius-md); display: grid; gap: 2px; }
@@ -178,7 +179,7 @@
   .credit a { color: var(--text-muted); border-bottom: 1px solid transparent; transition: color var(--dur-fast), border-color var(--dur-fast); }
   .credit a:hover { color: var(--text); border-bottom-color: var(--text-muted); }
   .credit sup { margin-left: 1px; font-size: 9px; }
-  .footmark { margin-top: var(--space-12); height: .62em; overflow: hidden; color: var(--surface-raised); }
+  .footmark { margin-top: var(--space-12); padding-bottom: var(--space-8); color: var(--surface-raised); }
 
   /* ---- Dialog (All details) ---- */
   dialog {
@@ -400,6 +401,13 @@
             <li><b>B</b><strong>RM 1,500</strong><span>Up to 500 guests</span></li>
           </ul>
         </article>
+        <article>
+          <span class="eyebrow">04</span>
+          <h3 class="h-2xl">Recording Studio Session</h3>
+          <ul class="options">
+            <li><strong>RM 250</strong><span>Per song</span></li>
+          </ul>
+        </article>
       </div>
       <div class="rates-cta"><button class="btn btn-outline" type="button" data-open="details">All details</button></div>
     </div>
@@ -459,6 +467,13 @@
               <li><span>Cake cutting</span><span>1</span></li>
               <li><span>Songs</span><span>12</span></li>
             </ul>
+          </article>
+        </div>
+
+        <h3 class="eyebrow">Recording Studio Session</h3>
+        <div class="pkgs">
+          <article class="pkg">
+            <h4>Per song <span>RM 250</span></h4>
           </article>
         </div>
 
